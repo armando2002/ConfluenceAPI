@@ -43,8 +43,12 @@ def labelpages():
     pageid = input("Enter a page ID: ")
     label = input("Enter a label: ")
     url = 'https://mytableausandbox.tableaucorp.com/rest/api/content/' + pageid + '/' + label
-    # add URL request here
-
+    r = requests.post(url, auth=basicauth)
+    if r.status_code == 200:
+        print("Success!")
+    elif r.status_code == 404:
+        print("Error")
+    return none
 # Define function for deleting pages
 def deletepaeges():
     pass
