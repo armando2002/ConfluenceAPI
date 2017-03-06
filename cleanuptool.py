@@ -1,6 +1,10 @@
 __author__ = 'smwilliams'
 
 # Install necessary libraries for Confluence API integration, CURL request, and reading/writing files
+import os
+import sys
+import json
+
 
 # Define function for labeling pages
 
