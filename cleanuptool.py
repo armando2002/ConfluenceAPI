@@ -33,10 +33,12 @@ else:
 # Define function for labeling pages
 # Initial version just has the user select one page, will iterate to reading from a file next
 def labelpages():
-    url = 'https://mytableausandbox.tableaucorp.com/rest/api/audit?
     print("\n Time to label some pages! \n")
     login()
-
+    pageid = raw_input("Enter a page ID: ")
+    label = raw_input("Enter a label: ")
+    url = 'https://mytableausandbox.tableaucorp.com/rest/api/content/' + pageid + '/' + label
+    urllib.request.post()
 
 # Define function for deleting pages
 def deletepaeges():
