@@ -5,7 +5,7 @@ import os
 import sys
 import json
 import getpass
-import urllib.request
+from requests.auth import HTTPBasicAuth
 import csv
 
 # Initialize menu and ask user for choice
@@ -43,7 +43,7 @@ def labelpages():
     pageid = input("Enter a page ID: ")
     label = input("Enter a label: ")
     url = 'https://mytableausandbox.tableaucorp.com/rest/api/content/' + pageid + '/' + label
-    urllib.request.post()
+    # add URL request here
 
 # Define function for deleting pages
 def deletepaeges():
