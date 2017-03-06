@@ -9,40 +9,46 @@ import urllib.request
 import csv
 
 # Initialize menu and ask user for choice
-print("Welcome to the Confluence tool. \n")
+print("Welcome to the Confluence API tool. \n")
+
+# Log into Confluence
+choiceloop = True
+while choiceloop:
+    choice = input("Choose one: (D)elete Pages, (M)ove Pages, or (L)abel Pages: ")
+    if choice.lower() == "d":
+        deletepaeges()
+        choiceloop = False
+    elif choice.lower() == "m":
+        movepages()
+        choiceloop = False
+    elif choice.lower() == "l":
+        labelpages()
+        choiceloop = False
+    else:
+        print("Please enter a valid choice.")
 
 # Ask user for credentials
 # QUESTION - Does Confluence have any SAML/Domain AUTH I could use instead?
 def login():
-    username = rawinput("Enter your Confluence username: ")
+    username = input("Enter your Confluence username: ")
     password = getpass.getpass("Enter your Confluence password: ")
-    basicauth = {'username': username, 'password': password}
-
-# Log into Confluence
-choice = raw_input("Choose one: (D)elete Pages, (M)ove Pages, or (L)abel Pages: ")
-if choice == "D" or "d":
-    deletepaeges()
-elif choice == "M" or choice == "m":
-    movepages()
-elif choice == "L" or choice == "l":
-    labelpages()
-else:
-    print("Please enter a valid choice.")
-    # QUESTION - How do I loop back to the top if the user doesn't select a valid choice?
+    basicauth = (username, password)
+    return basicauth
 
 # Define function for labeling pages
 # Initial version just has the user select one page, will iterate to reading from a file next
 def labelpages():
     print("\n Time to label some pages! \n")
     login()
-    pageid = raw_input("Enter a page ID: ")
-    label = raw_input("Enter a label: ")
+    pageid = input("Enter a page ID: ")
+    label = input("Enter a label: ")
     url = 'https://mytableausandbox.tableaucorp.com/rest/api/content/' + pageid + '/' + label
     urllib.request.post()
 
 # Define function for deleting pages
 def deletepaeges():
     pass
+
 # Define function for moving pages
 def movepages():
     pass
