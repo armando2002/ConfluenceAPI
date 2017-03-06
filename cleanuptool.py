@@ -15,5 +15,3 @@ __author__ = 'smwilliams'
 # Log into Confluence
 
 # Execute chosen function
-
-#
