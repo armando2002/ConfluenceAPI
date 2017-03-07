@@ -19,16 +19,19 @@ def login():
     basicauth = (username, password)
     return basicauth
 
-# Define function for labeling pages (right now it's just finding labels to test the connections)
+# Define function for labeling pages
 # Initial version just has the user select one page, will iterate to reading from a file next
 def labelpages():
-    print("\n Time to find some labels! \n")
+    print("\n Add a label to a Confluence page. \n")
     # calls the login function
     authorization = login()
     pageid = input("Enter a page ID: ")
+    labelname = input("Enter a label: ")
+    # Sets up the label addition per the Confluence API documentation
+    payload = {'prefix': 'global', 'name': labelname}
     # sends an HTTP request to Confluence
     url = 'https://mytableausandbox.tableaucorp.com/rest/api/content/' + pageid + '/' + "label"
-    r = requests.get(url, auth=authorization, verify=False)
+    r = requests.post(url, json=payload, auth=authorization, verify=False)
     if r.status_code == 200:
         print("Success!")
         print(r.json())
