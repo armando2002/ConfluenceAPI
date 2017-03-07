@@ -19,7 +19,7 @@ def login():
     basicauth = (username, password)
     return basicauth
 
-# Define function for labeling pages (right now it's just finding labels to test the connection)
+# Define function for labeling pages (right now it's just finding labels to test the connections)
 # Initial version just has the user select one page, will iterate to reading from a file next
 def labelpages():
     print("\n Time to find some labels! \n")
