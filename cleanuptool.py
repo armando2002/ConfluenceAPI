@@ -39,7 +39,19 @@ def labelpages():
     return None
 # Define function for deleting pages
 def deletepaeges():
-    pass
+    print("\n Delete a Confluence page. \n")
+    # calls the login function
+    authorization = login()
+    pageid = input("\n Enter a page ID: ")
+    url = 'https://mytableausandbox.tableaucorp.com/rest/api/content/' + pageid
+    # deletes the page via HTTP request
+    r = requests.delete(url, auth=authorization, verify=False)
+    # checks response and informs user
+    if r.status_code == 200 or r.status_code == 204:
+        print("\n Succesfully deleted!")
+    else:
+        print( "Error " + str(r.status_code))
+    return None
 
 # Define function for moving pages
 def movepages():
@@ -47,7 +59,7 @@ def movepages():
 
 
 # Initialize menu and ask user for choice
-print("\n Welcome to the Confluence API tool. \n")
+print("\nWelcome to the Confluence cleanup tool. This tool is currently pointed at the sandbox. \n")
 choiceloop = True
 while choiceloop:
     choice = input("Choose one: (D)elete a Page, (M)ove a Page, or (L)abel a page?: ")
