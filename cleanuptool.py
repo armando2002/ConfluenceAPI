@@ -14,7 +14,7 @@ basicauth = ()
 # Ask user for credentials
 # QUESTION - Does Confluence have any SAML/Domain AUTH I could use instead?
 def login():
-    username = input("Enter your Confluence username: ")
+    username = getpass.getuser()
     password = getpass.getpass()
     basicauth = (username, password)
     return basicauth
@@ -24,11 +24,11 @@ def login():
 def labelpages():
     print("\n Time to find some labels! \n")
     # calls the login function
-    login()
+    authorization = login()
     pageid = input("Enter a page ID: ")
     # sends an HTTP request to Confluence
     url = 'https://mytableausandbox.tableaucorp.com/rest/api/content/' + pageid + '/' + "label"
-    r = requests.get(url, auth=basicauth, verify=False)
+    r = requests.get(url, auth=authorization, verify=False)
     if r.status_code == 200:
         print("Success!")
         print(r.json())
@@ -44,6 +44,7 @@ def deletepaeges():
 # Define function for moving pages
 def movepages():
     pass
+
 
 # Initialize menu and ask user for choice
 print("Welcome to the Confluence API tool. \n")
