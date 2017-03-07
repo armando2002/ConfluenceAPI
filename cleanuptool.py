@@ -25,20 +25,17 @@ def labelpages():
     print("\n Add a label to a Confluence page. \n")
     # calls the login function
     authorization = login()
-    pageid = input("Enter a page ID: ")
-    labelname = input("Enter a label: ")
+    pageid = input("\n Enter a page ID: ")
+    labelname = input("\n Enter a label: ")
     # Sets up the label addition per the Confluence API documentation
     payload = {'prefix': 'global', 'name': labelname}
     # sends an HTTP request to Confluence
     url = 'https://mytableausandbox.tableaucorp.com/rest/api/content/' + pageid + '/' + "label"
     r = requests.post(url, json=payload, auth=authorization, verify=False)
     if r.status_code == 200:
-        print("Success!")
-        print(r.json())
-    elif r.status_code == 404:
-        print("Error")
+        print("\n Success!")
     else:
-        print(r.status_code)
+        print( "Error " + r.status_code)
     return None
 # Define function for deleting pages
 def deletepaeges():
@@ -50,10 +47,10 @@ def movepages():
 
 
 # Initialize menu and ask user for choice
-print("Welcome to the Confluence API tool. \n")
+print("\n Welcome to the Confluence API tool. \n")
 choiceloop = True
 while choiceloop:
-    choice = input("Choose one: (D)elete Pages, (M)ove Pages, or Find (L)abels on a page?: ")
+    choice = input("Choose one: (D)elete a Page, (M)ove a Page, or (L)abel a page?: ")
     if choice.lower() == "d":
         deletepaeges()
         choiceloop = False
@@ -64,4 +61,4 @@ while choiceloop:
         labelpages()
         choiceloop = False
     else:
-        print("Please enter a valid choice.")
+        print("\n Please enter a valid choice.")
