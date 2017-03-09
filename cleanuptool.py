@@ -53,21 +53,13 @@ def deletepaeges():
         print( "Error " + str(r.status_code))
     return None
 
-# Define function for moving pages
-def movepages():
-    pass
-
-
 # Initialize menu and ask user for choice
 print("\nWelcome to the Confluence cleanup tool. This tool is currently pointed at the sandbox. \n")
 choiceloop = True
 while choiceloop:
-    choice = input("Choose one: (D)elete a Page, (M)ove a Page, or (L)abel a page?: ")
+    choice = input("Choose one: (D)elete a Page or (L)abel a page?: ")
     if choice.lower() == "d":
         deletepaeges()
-        choiceloop = False
-    elif choice.lower() == "m":
-        movepages()
         choiceloop = False
     elif choice.lower() == "l":
         labelpages()
