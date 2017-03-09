@@ -41,7 +41,7 @@ def labelpages():
     return None
 
 # Define function for deleting pages
-def deletepaeges():
+def deletepages():
     print("\n Delete Confluence pages. \n")
     # calls the login function
     authorization = login()
@@ -71,7 +71,7 @@ choiceloop = True
 while choiceloop:
     choice = input("Choose one: (D)elete Pages or (L)abel Pages?: ")
     if choice.lower() == "d":
-        deletepaeges()
+        deletepages()
         choiceloop = False
     elif choice.lower() == "l":
         labelpages()
