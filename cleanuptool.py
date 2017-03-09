@@ -67,14 +67,14 @@ def deletepages():
 
 # Initialize menu and ask user for choice
 print("\nWelcome to the Confluence cleanup tool. This tool is currently pointed at the sandbox. \n")
-choiceloop = True
-while choiceloop:
+
+while True:
     choice = input("Choose one: (D)elete Pages or (L)abel Pages?: ")
     if choice.lower() == "d":
         deletepages()
-        choiceloop = False
+        break
     elif choice.lower() == "l":
         labelpages()
-        choiceloop = False
+        break
     else:
         print("\n Please enter a valid choice.")
