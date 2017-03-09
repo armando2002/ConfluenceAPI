@@ -22,7 +22,7 @@ def login():
 # Define function for labeling pages
 # Initial version just has the user select one page, will iterate to reading from a file next
 def labelpages():
-    print("\n Add a label to a Confluence page. \n")
+    print("\n Add a label to Confluence pages. \n")
     # calls the login function
     authorization = login()
     pageid = input("\n Enter a page ID: ")
@@ -39,25 +39,31 @@ def labelpages():
     return None
 # Define function for deleting pages
 def deletepaeges():
-    print("\n Delete a Confluence page. \n")
+    print("\n Delete Confluence pages. \n")
     # calls the login function
     authorization = login()
-    pageid = input("\n Enter a page ID: ")
-    url = 'https://mytableausandbox.tableaucorp.com/rest/api/content/' + pageid
-    # deletes the page via HTTP request
-    r = requests.delete(url, auth=authorization, verify=False)
-    # checks response and informs user
-    if r.status_code == 200 or r.status_code == 204:
-        print("\n Succesfully deleted!")
-    else:
-        print( "Error " + str(r.status_code))
+    #sets up CMD and asks user for CSV file
+    myFilePath = input('Enter the file path for your CSV of Page IDs (EG: C:\pageids.csv): ')
+    print('I will now read each Page ID in ' +myFilePath+ ' and delete each page.')
+    with open(myFilePath, 'rt') as csvfile:
+        reader = csv.reader(csvfile)
+        for line in reader:
+            print('Requesting deletion of {}'.format(line[0]))
+            url = 'https://mytableausandbox.tableaucorp.com/rest/api/content/{}'.format(line[0])
+            # deletes the page via HTTP request
+            r = requests.delete(url, auth=authorization, verify=False)
+            # checks response and informs user
+            if r.status_code == 200 or r.status_code == 204:
+                print("\n Succesfully deleted!")
+            else:
+                print( "Error " + str(r.status_code))
     return None
 
 # Initialize menu and ask user for choice
 print("\nWelcome to the Confluence cleanup tool. This tool is currently pointed at the sandbox. \n")
 choiceloop = True
 while choiceloop:
-    choice = input("Choose one: (D)elete a Page or (L)abel a page?: ")
+    choice = input("Choose one: (D)elete Pages or (L)abel Pages?: ")
     if choice.lower() == "d":
         deletepaeges()
         choiceloop = False
