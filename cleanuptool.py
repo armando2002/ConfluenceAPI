@@ -4,7 +4,21 @@ __author__ = 'smwilliams'
 import getpass
 import requests
 import csv
-#global variable for login
+
+def main():
+    # Initialize menu and ask user for choice
+    print("\nWelcome to the Confluence cleanup tool. This tool is currently pointed at the sandbox. \n")
+
+    while True:
+        choice = input("Choose one: (D)elete Pages or (L)abel Pages?: ")
+        if choice.lower() == "d":
+            deletepages()
+            break
+        elif choice.lower() == "l":
+            labelpages()
+            break
+        else:
+            print("\n Please enter a valid choice.")
 
 # Ask user for credentials
 def login():
@@ -65,16 +79,5 @@ def deletepages():
                 print('Error Occurred {}'.format(e))
     return None
 
-# Initialize menu and ask user for choice
-print("\nWelcome to the Confluence cleanup tool. This tool is currently pointed at the sandbox. \n")
-
-while True:
-    choice = input("Choose one: (D)elete Pages or (L)abel Pages?: ")
-    if choice.lower() == "d":
-        deletepages()
-        break
-    elif choice.lower() == "l":
-        labelpages()
-        break
-    else:
-        print("\n Please enter a valid choice.")
+if __name__ == '__main__':
+    main()
